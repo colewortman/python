@@ -1,16 +1,16 @@
 class Account:
-    def __init__(self, name: str) -> None:
+    def __init__(self, name):
         self.__account_name = name
         self.__account_balance = 0
     
-    def deposit(self, amount) -> bool:
+    def deposit(self, amount):
         if not amount <= 0:
             self.__account_balance += amount
             return True
         else:
             return False
     
-    def withdraw(self, amount) -> bool:
+    def withdraw(self, amount):
         if not amount <= 0:
             self.__account_balance -= amount
             return True
@@ -20,5 +20,5 @@ class Account:
     def get_balance(self):
         return self.__account_balance
     
-    def get_name(self) -> str:
+    def get_name(self):
         return self.__account_name
