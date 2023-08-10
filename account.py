@@ -10,7 +10,7 @@ class Account:
         self.__account_name = name
         self.__account_balance = 0
     
-    def deposit(self, amount: int) -> bool:
+    def deposit(self, amount: float) -> bool:
         '''
         Function to add to account balance by the amount
         :param amount: integer variable to add
@@ -22,19 +22,19 @@ class Account:
         else:
             return False
     
-    def withdraw(self, amount: int) -> bool:
+    def withdraw(self, amount: float) -> bool:
         '''
-        Function to subtract to account balance by the amount
+        Function to subtract from account balance by the amount
         :param amount: integer variable to subtract
         :return: boolean variable to signal transaction result
         '''
-        if not amount <= 0:
+        if not amount <= 0 and amount <= self.__account_balance:
             self.__account_balance -= amount
             return True
         else:
             return False
     
-    def get_balance(self) -> int:
+    def get_balance(self) -> float:
         '''
         Method to get the account balance
         :return: hidden account balance integer variable

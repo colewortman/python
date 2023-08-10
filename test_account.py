@@ -1,39 +1,41 @@
-import unittest
+import pytest
 from account import *
 
-class MyTestCase(unittest.TestCase):
-    def setUp(self):
+class Test:
+    def setup_method(self):
         self.account1 = Account('John')
+        self.account1.deposit(1)
+
         self.account2 = Account('Jane')
+        self.account2.deposit(1)
     
-    def tearDown(self):
+    def teardown_method(self):
         del self.account1
         del self.account2
 
     def test_init(self):
-        self.assertEqual(self.account1.get_name(), 'John')
-        self.assertEqual(self.account1.get_balance(), 0)
+        assert self.account1.get_name() == 'John'
+        assert self.account1.get_balance() == 1
 
-        self.assertEqual(self.account2.get_name(), 'Jane')
-        self.assertEqual(self.account2.get_balance(), 0)
+        assert self.account2.get_name() == 'Jane'
+        assert self.account2.get_balance() == 1
 
     def test_deposit(self):
-        self.assertFalse(self.account1.deposit(-1))
-        self.assertFalse(self.account1.deposit(0))
-        self.assertTrue(self.account1.deposit(1))
+        assert self.account1.deposit(-1) == False
+        assert self.account1.deposit(0) == False
+        assert self.account1.deposit(1) == True
 
-        self.assertFalse(self.account2.deposit(-1))
-        self.assertFalse(self.account2.deposit(0))
-        self.assertTrue(self.account2.deposit(1))
+        assert self.account2.deposit(-1) == False
+        assert self.account2.deposit(0) == False
+        assert self.account2.deposit(1) == True
 
     def test_withdraw(self):
-        self.assertFalse(self.account1.withdraw(-1))
-        self.assertFalse(self.account1.withdraw(0))
-        self.assertTrue(self.account1.withdraw(1))
+        assert self.account1.withdraw(-1) == False
+        assert self.account1.withdraw(0) == False
+        assert self.account1.withdraw(2) == False
+        assert self.account1.withdraw(1) == True
 
-        self.assertFalse(self.account2.withdraw(-1))
-        self.assertFalse(self.account2.withdraw(0))
-        self.assertTrue(self.account2.withdraw(1))
-
-if __name__ == '__main__':
-    unittest.main()
+        assert self.account2.withdraw(-1) == False
+        assert self.account2.withdraw(0) == False
+        assert self.account2.withdraw(2) == False
+        assert self.account2.withdraw(1) == True
